@@ -1,5 +1,7 @@
 <?php
 
+namespace Csv2Json;
+
 class DescriptionFile
 {
     /**

@@ -1,5 +1,7 @@
 <?php
 
+namespace Csv2Json;
+
 class TypeMapping
 {
     private const ALLOWED_TYPES = ['string', 'int', 'integer', 'float', 'bool', 'boolean', 'date', 'time', 'datetime'];

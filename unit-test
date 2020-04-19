@@ -1,0 +1,7 @@
+#!/usr/bin/php
+<?php
+
+require __DIR__.'/src/Arguments.php';
+require __DIR__.'/src/DescriptionFile.php';
+require __DIR__.'/src/TypeMapping.php';
+require __DIR__.'/src/CsvParser.php';

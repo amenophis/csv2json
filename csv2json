@@ -1,12 +1,9 @@
 #!/usr/bin/php
 <?php
 
-require __DIR__.'/src/Arguments.php';
-require __DIR__.'/src/DescriptionFile.php';
-require __DIR__.'/src/TypeMapping.php';
-require __DIR__.'/src/CsvParser.php';
+require __DIR__.'/src/autoload.php';
 
-$arguments = Arguments::parse($argv);
+$arguments = Csv2Json\Arguments::parse($argv);
 if ($arguments->hasParsingErrors()) {
     echo 'Errors during arguments parsing :'.PHP_EOL;
     foreach ($arguments->getParsingErrors() as $error) {
@@ -14,10 +11,10 @@ if ($arguments->hasParsingErrors()) {
     }
 }
 
-$description = DescriptionFile::parse($arguments->getDescriptionFilePath());
+$description = Csv2Json\DescriptionFile::parse($arguments->getDescriptionFilePath());
 
 
-$csvParser = CsvParser::initFromFilePath($arguments->getCsvFilePath());
+$csvParser = Csv2Json\CsvParser::initFromFilePath($arguments->getCsvFilePath());
 foreach($csvParser->getIterator() as $line => $data) {
     var_dump($line);
     var_dump($data);

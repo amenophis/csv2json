@@ -1,5 +1,7 @@
 <?php
 
+namespace Csv2Json;
+
 final class Arguments
 {
     private ?string $csvFilePath;
