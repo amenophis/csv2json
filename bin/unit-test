@@ -1,0 +1,40 @@
+#!/usr/bin/env php
+<?php
+
+require __DIR__ . '/../vendor/autoload.php';
+
+$testsIterator = new RegexIterator(
+    new RecursiveIteratorIterator(
+        new RecursiveDirectoryIterator(__DIR__.'/../tests')
+    ),
+    '/^.+Test\.php$/i'
+);
+
+$testCounter = 0;
+$testsSuccess = [];
+$testsFailure = [];
+
+/** @var SplFileInfo $file */
+foreach ($testsIterator as $file) {
+    try {
+        $result = require $file->getPathname();
+        if ($result) {
+            $testsSuccess[] = $file->getFilename();
+            continue;
+        }
+        $testsFailure[] = $file->getFilename();
+    } catch (Throwable $e) {
+        $testsFailure[] = $file->getFilename();
+    } finally {
+        ++$testCounter;
+    }
+}
+
+printf("Tests executed: %d\n\n", $testCounter);
+printf("Tests KO: %d\n", count($testsFailure));
+foreach ($testsFailure as $fail)
+    printf("* %s\n", $fail); {
+}
+
+exit($testsFailure === [] ? 0 : 1);
+

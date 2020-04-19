@@ -3,4 +3,5 @@
 
 name = string  # oui, il peut y avoir des espaces de chaque coté du "="
 id=?int
-date=datetime
+date=date
+f=float

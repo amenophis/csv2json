@@ -20,10 +20,6 @@ final class Arguments
             $this->parsingErrors[] = 'Argument "fields" must looks like field1,field2,field3';
         }
 
-        if (null === $aggregate) {
-            $this->parsingErrors[] = 'Argument "aggregate" is required';
-        }
-
         if (null === $descriptionFilePath) {
             $this->parsingErrors[] = 'Argument "desc" is required';
         }
@@ -89,7 +85,7 @@ final class Arguments
         return $this->fields;
     }
 
-    public function getAggregate(): string
+    public function getAggregate(): ?string
     {
         return $this->aggregate;
     }
