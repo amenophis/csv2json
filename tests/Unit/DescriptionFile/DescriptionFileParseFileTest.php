@@ -6,7 +6,7 @@ use Csv2Json\DescriptionFile\DescriptionFile;
 use Csv2Json\Exception\FileCannotBeOpenedException;
 use Csv2Json\Tests\TestCase;
 
-(new class() extends TestCase {
+return new class() extends TestCase {
     public function __invoke()
     {
         $description = DescriptionFile::parse(self::FIXTURES_DIR.'/description.txt');
@@ -56,4 +56,4 @@ use Csv2Json\Tests\TestCase;
         $this->assertEquals('boolean', $invalidType->getType());
         $this->assertEquals(false, $invalidType->isNullable());
     }
-})();
+};

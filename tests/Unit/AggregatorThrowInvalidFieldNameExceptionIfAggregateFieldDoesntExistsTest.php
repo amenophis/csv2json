@@ -6,7 +6,7 @@ use Csv2Json\Aggregator;
 use Csv2Json\Exception\InvalidFieldException;
 use Csv2Json\Tests\TestCase;
 
-(new class() extends TestCase {
+return new class() extends TestCase {
     public function __invoke()
     {
         $data = [
@@ -38,4 +38,4 @@ use Csv2Json\Tests\TestCase;
             dd($data);
         });
     }
-})();
+};

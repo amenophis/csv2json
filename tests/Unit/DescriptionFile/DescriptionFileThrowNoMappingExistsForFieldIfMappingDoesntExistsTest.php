@@ -7,7 +7,7 @@ use Csv2Json\Exception\FileCannotBeOpenedException;
 use Csv2Json\Exception\NoMappingExistsForFieldException;
 use Csv2Json\Tests\TestCase;
 
-(new class() extends TestCase {
+return new class() extends TestCase {
     public function __invoke()
     {
         $description = DescriptionFile::parse(self::FIXTURES_DIR.'/description.txt');
@@ -15,4 +15,4 @@ use Csv2Json\Tests\TestCase;
             $description->getType('phantom');
         });
     }
-})();
+};

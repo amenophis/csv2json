@@ -8,7 +8,7 @@ use Csv2Json\Exception\UnableToEncodeJsonException;
 use Csv2Json\Exception\UnformatableValueException;
 use Csv2Json\Tests\TestCase;
 
-(new class() extends TestCase {
+return new class() extends TestCase {
     public function __invoke()
     {
         $e = UnformatableValueException::create();
@@ -18,4 +18,4 @@ use Csv2Json\Tests\TestCase;
             $e->getMessage()
         );
     }
-})();
+};

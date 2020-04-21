@@ -5,7 +5,7 @@ namespace Csv2Json\Tests\Unit\CsvReader;
 use Csv2Json\CsvReader;
 use Csv2Json\Tests\TestCase;
 
-(new class() extends TestCase {
+return new class() extends TestCase {
     public function __invoke()
     {
         $csvReader = new CsvReader();
@@ -49,4 +49,4 @@ use Csv2Json\Tests\TestCase;
             ],
         ], $data);
     }
-})();
+};

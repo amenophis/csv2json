@@ -6,6 +6,11 @@ abstract class TestCase
 {
     const FIXTURES_DIR = __DIR__.'/../fixtures';
 
+    /**
+     * @throws AssertException
+     */
+    abstract public function __invoke();
+
     protected function assertTrue($value)
     {
         if (true !== $value) {

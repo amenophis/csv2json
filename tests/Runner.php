@@ -26,7 +26,9 @@ class Runner
         /** @var \SplFileInfo $file */
         foreach ($testsIterator as $file) {
             try {
-                require $file->getPathname();
+                /** @var TestCase $testCase */
+                $testCase = require $file->getPathname();
+                $testCase();
 
                 $testsSuccess[] = $file->getFilename();
             } catch (AssertException $e) {
@@ -45,6 +47,6 @@ class Runner
             printf("* %s\n", $fail); {
         }
 
-        exit($testCounter === count($testsSuccess) ? 0 : 1);
+        return $testCounter === count($testsSuccess) ? 0 : 1;
     }
 }

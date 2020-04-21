@@ -6,7 +6,7 @@ use Csv2Json\CsvReader;
 use Csv2Json\Exception\FileCannotBeOpenedException;
 use Csv2Json\Tests\TestCase;
 
-(new class() extends TestCase {
+return new class() extends TestCase {
     public function __invoke()
     {
         $csvReader = new CsvReader();
@@ -14,4 +14,4 @@ use Csv2Json\Tests\TestCase;
             $csvReader->read(self::FIXTURES_DIR, []);
         });
     }
-})();
+};

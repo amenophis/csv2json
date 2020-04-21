@@ -7,7 +7,7 @@ use Csv2Json\Exception\UnformatableValueException;
 use Csv2Json\Formatter;
 use Csv2Json\Tests\TestCase;
 
-(new class() extends TestCase {
+return new class() extends TestCase {
     public function __invoke()
     {
         $descriptionFile = DescriptionFile::parse(self::FIXTURES_DIR.'/description.txt');
@@ -23,4 +23,4 @@ use Csv2Json\Tests\TestCase;
             $formatter->format($descriptionFile, $data);
         });
     }
-})();
+};

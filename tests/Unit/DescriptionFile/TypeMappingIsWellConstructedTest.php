@@ -7,7 +7,7 @@ use Csv2Json\DescriptionFile\TypeMapping;
 use Csv2Json\Exception\FileCannotBeOpenedException;
 use Csv2Json\Tests\TestCase;
 
-(new class() extends TestCase {
+return new class() extends TestCase {
     public function __invoke()
     {
         $typeMapping = new TypeMapping(
@@ -28,4 +28,4 @@ use Csv2Json\Tests\TestCase;
         $this->assertEquals($type, $typeMapping->getType());
         $this->assertEquals($nullable, $typeMapping->isNullable());
     }
-})();
+};

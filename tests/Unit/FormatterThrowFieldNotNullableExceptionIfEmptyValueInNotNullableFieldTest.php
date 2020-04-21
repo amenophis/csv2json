@@ -15,7 +15,7 @@ use Csv2Json\TypeFormatter\IntegerTypeFormatter;
 use Csv2Json\TypeFormatter\StringTypeFormatter;
 use Csv2Json\TypeFormatter\TimeTypeFormatter;
 
-(new class() extends TestCase {
+return new class() extends TestCase {
     public function __invoke()
     {
         $descriptionFile = DescriptionFile::parse(self::FIXTURES_DIR.'/description.txt');
@@ -43,4 +43,4 @@ use Csv2Json\TypeFormatter\TimeTypeFormatter;
             $formatter->format($descriptionFile, $data);
         });
     }
-})();
+};
