@@ -3,7 +3,6 @@
 namespace Csv2Json\Tests\Unit\JsonEncoder;
 
 use Csv2Json\DescriptionFile\DescriptionFile;
-use Csv2Json\Exception\UnformatableValueException;
 use Csv2Json\Formatter;
 use Csv2Json\Tests\TestCase;
 use Csv2Json\TypeFormatter\BooleanTypeFormatter;
@@ -26,10 +25,10 @@ return new class() extends TestCase {
                 'sub' => [
                     'id' => '1',
                     'sub' => [
-                        'id' => '1'
-                    ]
-                ]
-            ]
+                        'id' => '1',
+                    ],
+                ],
+            ],
         ];
 
         $formatter = new Formatter(...[
@@ -51,9 +50,9 @@ return new class() extends TestCase {
                     'sub' => [
                         'id' => 1,
                         'sub' => [
-                            'id' => 1
-                        ]
-                    ]
+                            'id' => 1,
+                        ],
+                    ],
                 ],
             ],
             $formattedData

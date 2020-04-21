@@ -28,7 +28,7 @@ final class CsvReader
 
         $data = [];
         foreach ($file as $rowIndex => $rowValues) {
-            if (0 === $rowIndex || $rowValues === false) {
+            if (0 === $rowIndex || false === $rowValues) {
                 // Skip the header rowValues and empty lines
                 continue;
             }

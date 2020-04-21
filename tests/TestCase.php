@@ -11,6 +11,13 @@ abstract class TestCase
      */
     abstract public function __invoke();
 
+    protected function assertEquals($expected, $value)
+    {
+        if ($expected !== $value) {
+            throw new AssertException('The value must be equals');
+        }
+    }
+
     protected function assertTrue($value)
     {
         if (true !== $value) {
@@ -18,10 +25,10 @@ abstract class TestCase
         }
     }
 
-    protected function assertEquals($expected, $value)
+    protected function assertFalse($value)
     {
-        if ($expected !== $value) {
-            throw new AssertException('The values must be equals');
+        if (false !== $value) {
+            throw new AssertException('The value must be false');
         }
     }
 

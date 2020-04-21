@@ -2,15 +2,13 @@
 
 namespace Csv2Json;
 
-use Csv2Json\Aggregator;
-use Csv2Json\Exception\InvalidFieldException;
-use Csv2Json\CsvReader;
-use Csv2Json\Exception\FileCannotBeOpenedException;
 use Csv2Json\DescriptionFile\DescriptionFile;
 use Csv2Json\Exception\FieldNotNullableException;
+use Csv2Json\Exception\FileCannotBeOpenedException;
+use Csv2Json\Exception\InvalidFieldException;
 use Csv2Json\Exception\NoMappingExistsForFieldException;
+use Csv2Json\Exception\UnableToEncodeJsonException;
 use Csv2Json\Exception\UnformatableValueException;
-use Csv2Json\Formatter;
 use Csv2Json\TypeFormatter\BooleanTypeFormatter;
 use Csv2Json\TypeFormatter\DatetimeTypeFormatter;
 use Csv2Json\TypeFormatter\DateTypeFormatter;
@@ -19,8 +17,6 @@ use Csv2Json\TypeFormatter\FloatTypeFormatter;
 use Csv2Json\TypeFormatter\IntegerTypeFormatter;
 use Csv2Json\TypeFormatter\StringTypeFormatter;
 use Csv2Json\TypeFormatter\TimeTypeFormatter;
-use Csv2Json\Exception\UnableToEncodeJsonException;
-use Csv2Json\JsonEncoder;
 
 final class Application
 {

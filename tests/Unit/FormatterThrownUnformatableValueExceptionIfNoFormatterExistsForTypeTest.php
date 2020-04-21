@@ -14,12 +14,12 @@ return new class() extends TestCase {
 
         $data = [
             [
-                'id' => '1'
-            ]
+                'id' => '1',
+            ],
         ];
 
         $formatter = new Formatter();
-        $this->expectException(UnformatableValueException::class, function () use ($formatter, $descriptionFile, $data){
+        $this->expectException(UnformatableValueException::class, function () use ($formatter, $descriptionFile, $data) {
             $formatter->format($descriptionFile, $data);
         });
     }

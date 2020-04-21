@@ -7,7 +7,7 @@ class Runner
     public function run(array $args): int
     {
         $filter = '/^.+Test\.php$/i';
-        if (count($args) === 2) {
+        if (2 === \count($args)) {
             $filter = "/^.+{$args[1]}\.php$/i";
         }
 
@@ -41,12 +41,12 @@ class Runner
         }
 
         printf("Tests executed: %d\n\n", $testCounter);
-        printf("Tests KO: %d\n", count($testsFailure));
-        printf("Tests Errors: %d\n", count($testsErrors));
-        foreach ($testsFailure as $fail)
-            printf("* %s\n", $fail); {
+        printf("Tests KO: %d\n", \count($testsFailure));
+        printf("Tests Errors: %d\n", \count($testsErrors));
+        foreach ($testsFailure as $fail) {
+            printf("* %s\n", $fail);
         }
 
-        return $testCounter === count($testsSuccess) ? 0 : 1;
+        return $testCounter === \count($testsSuccess) ? 0 : 1;
     }
 }

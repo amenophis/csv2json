@@ -2,9 +2,7 @@
 
 namespace Csv2Json\Tests\Unit\Formatter\DescriptionFile;
 
-use Csv2Json\DescriptionFile\DescriptionFile;
 use Csv2Json\DescriptionFile\TypeMapping;
-use Csv2Json\Exception\FileCannotBeOpenedException;
 use Csv2Json\Tests\TestCase;
 
 return new class() extends TestCase {

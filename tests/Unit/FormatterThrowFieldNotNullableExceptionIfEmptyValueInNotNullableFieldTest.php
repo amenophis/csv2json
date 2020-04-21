@@ -24,8 +24,8 @@ return new class() extends TestCase {
             [
                 'id' => '1',
                 'name' => '',
-                'date' => '2020-05-07'
-            ]
+                'date' => '2020-05-07',
+            ],
         ];
 
         $formatter = new Formatter(...[
@@ -39,7 +39,7 @@ return new class() extends TestCase {
             new TimeTypeFormatter(),
         ]);
 
-        $this->expectException(FieldNotNullableException::class, function () use ($formatter, $descriptionFile, $data){
+        $this->expectException(FieldNotNullableException::class, function () use ($formatter, $descriptionFile, $data) {
             $formatter->format($descriptionFile, $data);
         });
     }
