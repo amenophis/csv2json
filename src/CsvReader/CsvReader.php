@@ -1,8 +1,8 @@
 <?php
 
-namespace Csv2Json\Reader;
+namespace Csv2Json\CsvReader;
 
-use Csv2Json\Formatter\DataFormatter;
+use Csv2Json\Formatter\Formatter;
 
 final class CsvReader
 {
@@ -11,7 +11,7 @@ final class CsvReader
 
     private array $columnIndexToFieldName = [];
 
-    public function read(string $csvFilePath, array $fields, ?string $aggregateOnField, DataFormatter $formatter): array
+    public function read(string $csvFilePath, array $fields): array
     {
         if (!is_readable($csvFilePath)) {
             throw new \InvalidArgumentException("File {$csvFilePath} is not readable");
@@ -39,12 +39,12 @@ final class CsvReader
             $extractedRow = [];
             foreach ($rowValues as $columnIndex => $columnValue) {
                 $fieldName = $this->columnIndexToFieldName[$columnIndex];
-                if (in_array($fieldName, $fields)) {
+                if (in_array($fieldName, $fields, true)) {
                     $extractedRow[$fieldName] = $columnValue;
                 }
             }
 
-            $data[] = $formatter->format($extractedRow);
+            $data[] = $extractedRow;
         }
 
         return $data;

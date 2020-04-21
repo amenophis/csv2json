@@ -2,11 +2,21 @@
 
 namespace Csv2Json\Aggregator;
 
-final class DataAggregator
+use Csv2Json\Aggregator\Exception\InvalidFieldException;
+
+final class Aggregator
 {
+    /**
+     * @throws InvalidFieldException
+     */
     public function aggregate(array $data, string $fieldName): array
     {
-        $aggregatorValues = array_unique(array_column($data, $fieldName));
+        $fieldValues = array_column($data, $fieldName);
+        if (count($fieldValues) === 0) {
+            throw InvalidFieldException::create($fieldName);
+        }
+
+        $aggregatorValues = array_unique($fieldValues);
         $newData = array_fill_keys($aggregatorValues, []);
 
         foreach ($data as $rowIndex => $rowValue) {

@@ -2,9 +2,10 @@
 
 namespace Csv2Json\Tests\Unit\Encoder;
 
-use Csv2Json\Encoder\JsonEncoder;
+use Csv2Json\JsonEncoder\JsonEncoder;
+use Csv2Json\Tests\TestCase;
 
-return (new class
+(new class extends TestCase
 {
     public function __invoke()
     {
@@ -14,6 +15,6 @@ return (new class
         $encoder = new JsonEncoder();
         $encoded = $encoder->encode($data, false);
 
-        return $encoded === json_encode($data);
+        $this->assertEquals($encoded, json_encode($data));
     }
 })();

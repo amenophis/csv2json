@@ -2,14 +2,16 @@
 
 namespace Csv2Json;
 
-use Csv2Json\Aggregator\DataAggregator;
+use Csv2Json\Aggregator\Aggregator;
+use Csv2Json\Aggregator\Exception\InvalidFieldException;
+use Csv2Json\JsonEncoder\Exception\UnableToEncodeJsonException;
 use Csv2Json\Formatter\DescriptionFile\DescriptionFile;
-use Csv2Json\Encoder\JsonEncoder;
+use Csv2Json\JsonEncoder\JsonEncoder;
 use Csv2Json\Formatter\Exception\FieldNotNullableException;
 use Csv2Json\Formatter\Type\EmptyFormatterType;
 use Csv2Json\Formatter\Exception\UnformattableValueException;
-use Csv2Json\Reader\CsvReader;
-use Csv2Json\Formatter\DataFormatter;
+use Csv2Json\CsvReader\CsvReader;
+use Csv2Json\Formatter\Formatter;
 use Csv2Json\Formatter\Type\BooleanFormatterType;
 use Csv2Json\Formatter\Type\DatetimeFormatterType;
 use Csv2Json\Formatter\Type\DateFormatterType;
@@ -20,6 +22,28 @@ use Csv2Json\Formatter\Type\TimeFormatterType;
 
 final class Application
 {
+    private CsvReader $reader;
+    private Aggregator $aggregator;
+    private JsonEncoder $encoder;
+    private Formatter $formatter;
+
+    public function __construct()
+    {
+        $this->reader = new CsvReader();
+        $this->aggregator = new Aggregator();
+        $this->encoder = new JsonEncoder();
+        $this->formatter = new Formatter(...[
+            new EmptyFormatterType(),
+            new BooleanFormatterType(),
+            new DatetimeFormatterType(),
+            new DateFormatterType(),
+            new FloatFormatterType(),
+            new IntegerFormatterType(),
+            new StringFormatterType(),
+            new TimeFormatterType(),
+        ]);
+    }
+
     public function run(array $args): int
     {
         $arguments = Arguments::parse($args);
@@ -30,44 +54,21 @@ final class Application
             }
         }
 
-        $fieldsDescription = DescriptionFile::parse($arguments->getDescriptionFilePath());
-
-        $formatter = new DataFormatter($fieldsDescription, ...[
-            new EmptyFormatterType(),
-            new BooleanFormatterType(),
-            new DatetimeFormatterType(),
-            new DateFormatterType(),
-            new FloatFormatterType(),
-            new IntegerFormatterType(),
-            new StringFormatterType(),
-            new TimeFormatterType(),
-        ]);
-
-        $reader = new CsvReader();
-        $aggregator = new DataAggregator();
-        $writer = new JsonEncoder();
-
         try {
-            $data = $reader->read(
-                $arguments->getCsvFilePath(),
-                $arguments->getFields(),
-                $arguments->getAggregate(),
-                $formatter
+            $fieldsDescription = DescriptionFile::parse($arguments->getDescriptionFilePath()); // TODO: Missing Exception
+
+            $data = $this->reader->read($arguments->getCsvFilePath(), $arguments->getFields());
+            $data = $this->formatter->format($fieldsDescription, $data);
+            $data = $this->aggregator->aggregate($data, $arguments->getAggregate());
+            print $this->encoder->encode(
+                $data,
+                $arguments->isPretty()
             );
-        } catch (FieldNotNullableException|UnformattableValueException $e) {
+        } catch (FieldNotNullableException|UnformattableValueException|FieldNotNullableException|UnformattableValueException|InvalidFieldException|UnableToEncodeJsonException $e) {
             print $e->getMessage();
 
             return 1;
         }
-
-        if ($arguments->getAggregate()) {
-            $data = $aggregator->aggregate($data, $arguments->getAggregate());
-        }
-
-        print $writer->encode(
-            $data,
-            $arguments->isPretty()
-        );
 
         return 0;
     }

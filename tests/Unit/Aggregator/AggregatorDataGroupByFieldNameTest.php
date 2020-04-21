@@ -2,9 +2,10 @@
 
 namespace Csv2Json\Tests\Unit\Encoder;
 
-use Csv2Json\Aggregator\DataAggregator;
+use Csv2Json\Aggregator\Aggregator;
+use Csv2Json\Tests\TestCase;
 
-return (new class
+(new class extends TestCase
 {
     public function __invoke()
     {
@@ -30,10 +31,10 @@ return (new class
                 'value' => 'Etienne'
             ]
         ];
-        $aggregator = new DataAggregator();
+        $aggregator = new Aggregator();
         $data = $aggregator->aggregate($data, 'firstname');
 
-        return $data === [
+        $this->assertEquals($data, [
             'Dupond' => [
                 ['value' => 'Jean'],
                 ['value' => 'Jacques'],
@@ -43,6 +44,6 @@ return (new class
                 ['value' => 'Pierre'],
                 ['value' => 'Etienne'],
             ]
-        ];
+        ]);
     }
 })();

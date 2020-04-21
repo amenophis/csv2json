@@ -8,17 +8,15 @@ use Csv2Json\Formatter\Exception\FieldNotNullableException;
 use Csv2Json\Formatter\Exception\UnformattableValueException;
 use Csv2Json\Formatter\Type\FormatterType;
 
-final class DataFormatter
+final class Formatter
 {
     /**
      * @var FormatterType[]
      */
     private array $types;
-    private DescriptionFile $descriptionFile;
 
-    public function __construct(DescriptionFile $descriptionFile, FormatterType ...$types)
+    public function __construct(FormatterType ...$types)
     {
-        $this->descriptionFile = $descriptionFile;
         $this->types = $types;
     }
 
@@ -27,10 +25,10 @@ final class DataFormatter
      * @throws FieldNotNullableException
      * @throws UnformattableValueException
      */
-    public function format(array $data): array
+    public function format(DescriptionFile $descriptionFile, array $data): array
     {
         foreach ($data as $fieldName => &$value) {
-            $fieldType = $this->descriptionFile->getType($fieldName);
+            $fieldType = $descriptionFile->getType($fieldName);
             foreach ($this->types as $type) {
                 if ('' === $value && !$fieldType->isNullable()) {
                     throw FieldNotNullableException::create();

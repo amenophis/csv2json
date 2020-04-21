@@ -13,18 +13,18 @@ $testsIterator = new RegexIterator(
 $testCounter = 0;
 $testsSuccess = [];
 $testsFailure = [];
+$testsErrors = [];
 
 /** @var SplFileInfo $file */
 foreach ($testsIterator as $file) {
     try {
-        $result = require $file->getPathname();
-        if ($result) {
-            $testsSuccess[] = $file->getFilename();
-            continue;
-        }
+        require $file->getPathname();
+
+        $testsSuccess[] = $file->getFilename();
+    } catch (\Csv2Json\Tests\AssertException $e) {
         $testsFailure[] = $file->getFilename();
     } catch (Throwable $e) {
-        $testsFailure[] = $file->getFilename();
+        $testsErrors[] = $file->getFilename();
     } finally {
         ++$testCounter;
     }
@@ -32,9 +32,10 @@ foreach ($testsIterator as $file) {
 
 printf("Tests executed: %d\n\n", $testCounter);
 printf("Tests KO: %d\n", count($testsFailure));
+printf("Tests Errors: %d\n", count($testsErrors));
 foreach ($testsFailure as $fail)
     printf("* %s\n", $fail); {
 }
 
-exit($testsFailure === [] ? 0 : 1);
+exit($testCounter === count($testsSuccess) ? 0 : 1);
 
