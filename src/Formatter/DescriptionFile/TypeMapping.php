@@ -1,6 +1,6 @@
 <?php
 
-namespace Csv2Json;
+namespace Csv2Json\Formatter\DescriptionFile;
 
 class TypeMapping
 {

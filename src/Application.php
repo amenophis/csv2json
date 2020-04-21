@@ -3,10 +3,11 @@
 namespace Csv2Json;
 
 use Csv2Json\Aggregator\DataAggregator;
+use Csv2Json\Formatter\DescriptionFile\DescriptionFile;
 use Csv2Json\Encoder\JsonEncoder;
-use Csv2Json\Formatter\FieldNotNullableException;
+use Csv2Json\Formatter\Exception\FieldNotNullableException;
 use Csv2Json\Formatter\Type\EmptyFormatterType;
-use Csv2Json\Formatter\UnformattableValueException;
+use Csv2Json\Formatter\Exception\UnformattableValueException;
 use Csv2Json\Reader\CsvReader;
 use Csv2Json\Formatter\DataFormatter;
 use Csv2Json\Formatter\Type\BooleanFormatterType;
@@ -29,10 +30,9 @@ final class Application
             }
         }
 
-        $fieldsDescription = new DescriptionFile();
-        $mapping = $fieldsDescription->parse($arguments->getDescriptionFilePath());
+        $fieldsDescription = DescriptionFile::parse($arguments->getDescriptionFilePath());
 
-        $formatter = new DataFormatter($mapping, ...[
+        $formatter = new DataFormatter($fieldsDescription, ...[
             new EmptyFormatterType(),
             new BooleanFormatterType(),
             new DatetimeFormatterType(),

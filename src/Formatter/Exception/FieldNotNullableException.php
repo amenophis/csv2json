@@ -1,6 +1,6 @@
 <?php
 
-namespace Csv2Json\Formatter;
+namespace Csv2Json\Formatter\Exception;
 
 class FieldNotNullableException extends \InvalidArgumentException
 {
