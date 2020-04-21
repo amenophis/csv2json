@@ -7,6 +7,7 @@ use Csv2Json\Aggregator\Exception\InvalidFieldException;
 use Csv2Json\CsvReader\CsvReader;
 use Csv2Json\Formatter\DescriptionFile\DescriptionFile;
 use Csv2Json\Formatter\Exception\FieldNotNullableException;
+use Csv2Json\Formatter\Exception\NoMappingExistsForFieldException;
 use Csv2Json\Formatter\Exception\UnformattableValueException;
 use Csv2Json\Formatter\Formatter;
 use Csv2Json\Formatter\Type\BooleanFormatterType;
@@ -60,11 +61,15 @@ final class Application
             $data = $this->reader->read($arguments->getCsvFilePath(), $arguments->getFields());
             $data = $this->formatter->format($fieldsDescription, $data);
             $data = $this->aggregator->aggregate($data, $arguments->getAggregate());
-            echo $this->encoder->encode(
-                $data,
-                $arguments->isPretty()
-            );
-        } catch (FieldNotNullableException | UnformattableValueException | FieldNotNullableException | UnformattableValueException | InvalidFieldException | UnableToEncodeJsonException $e) {
+            echo $this->encoder->encode($data, $arguments->isPretty());
+        } catch (
+            FieldNotNullableException |
+            UnformattableValueException |
+            FieldNotNullableException |
+            InvalidFieldException |
+            UnableToEncodeJsonException |
+            NoMappingExistsForFieldException $e
+        ) {
             echo $e->getMessage();
 
             return 1;
