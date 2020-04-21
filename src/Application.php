@@ -2,46 +2,47 @@
 
 namespace Csv2Json;
 
-use Csv2Json\Aggregator\Aggregator;
-use Csv2Json\Aggregator\Exception\InvalidFieldException;
-use Csv2Json\CsvReader\CsvReader;
-use Csv2Json\Formatter\DescriptionFile\DescriptionFile;
-use Csv2Json\Formatter\Exception\FieldNotNullableException;
-use Csv2Json\Formatter\Exception\NoMappingExistsForFieldException;
-use Csv2Json\Formatter\Exception\UnformattableValueException;
-use Csv2Json\Formatter\Formatter;
-use Csv2Json\Formatter\Type\BooleanFormatterType;
-use Csv2Json\Formatter\Type\DateFormatterType;
-use Csv2Json\Formatter\Type\DatetimeFormatterType;
-use Csv2Json\Formatter\Type\EmptyFormatterType;
-use Csv2Json\Formatter\Type\FloatFormatterType;
-use Csv2Json\Formatter\Type\IntegerFormatterType;
-use Csv2Json\Formatter\Type\StringFormatterType;
-use Csv2Json\Formatter\Type\TimeFormatterType;
-use Csv2Json\JsonEncoder\Exception\UnableToEncodeJsonException;
-use Csv2Json\JsonEncoder\JsonEncoder;
+use Csv2Json\Aggregator;
+use Csv2Json\Exception\InvalidFieldException;
+use Csv2Json\CsvReader;
+use Csv2Json\Exception\FileCannotBeOpenedException;
+use Csv2Json\DescriptionFile\DescriptionFile;
+use Csv2Json\Exception\FieldNotNullableException;
+use Csv2Json\Exception\NoMappingExistsForFieldException;
+use Csv2Json\Exception\UnformatableValueException;
+use Csv2Json\Formatter;
+use Csv2Json\TypeFormatter\BooleanTypeFormatter;
+use Csv2Json\TypeFormatter\DatetimeTypeFormatter;
+use Csv2Json\TypeFormatter\DateTypeFormatter;
+use Csv2Json\TypeFormatter\EmptyTypeFormatter;
+use Csv2Json\TypeFormatter\FloatTypeFormatter;
+use Csv2Json\TypeFormatter\IntegerTypeFormatter;
+use Csv2Json\TypeFormatter\StringTypeFormatter;
+use Csv2Json\TypeFormatter\TimeTypeFormatter;
+use Csv2Json\Exception\UnableToEncodeJsonException;
+use Csv2Json\JsonEncoder;
 
 final class Application
 {
-    private CsvReader $reader;
+    private CsvReader $csvReader;
     private Aggregator $aggregator;
-    private JsonEncoder $encoder;
+    private JsonEncoder $jsonEncoder;
     private Formatter $formatter;
 
     public function __construct()
     {
-        $this->reader = new CsvReader();
+        $this->csvReader = new CsvReader();
         $this->aggregator = new Aggregator();
-        $this->encoder = new JsonEncoder();
+        $this->jsonEncoder = new JsonEncoder();
         $this->formatter = new Formatter(...[
-            new EmptyFormatterType(),
-            new BooleanFormatterType(),
-            new DatetimeFormatterType(),
-            new DateFormatterType(),
-            new FloatFormatterType(),
-            new IntegerFormatterType(),
-            new StringFormatterType(),
-            new TimeFormatterType(),
+            new EmptyTypeFormatter(),
+            new BooleanTypeFormatter(),
+            new DatetimeTypeFormatter(),
+            new DateTypeFormatter(),
+            new FloatTypeFormatter(),
+            new IntegerTypeFormatter(),
+            new StringTypeFormatter(),
+            new TimeTypeFormatter(),
         ]);
     }
 
@@ -58,14 +59,16 @@ final class Application
         try {
             $fieldsDescription = DescriptionFile::parse($arguments->getDescriptionFilePath()); // TODO: Missing Exception
 
-            $data = $this->reader->read($arguments->getCsvFilePath(), $arguments->getFields());
+            $data = $this->csvReader->read($arguments->getCsvFilePath(), $arguments->getFields());
             $data = $this->formatter->format($fieldsDescription, $data);
-            $data = $this->aggregator->aggregate($data, $arguments->getAggregate());
-            echo $this->encoder->encode($data, $arguments->isPretty());
+            if (null !== $arguments->getAggregate()) {
+                $data = $this->aggregator->aggregate($data, $arguments->getAggregate());
+            }
+            echo $this->jsonEncoder->encode($data, $arguments->isPretty());
         } catch (
+            FileCannotBeOpenedException |
             FieldNotNullableException |
-            UnformattableValueException |
-            FieldNotNullableException |
+            UnformatableValueException |
             InvalidFieldException |
             UnableToEncodeJsonException |
             NoMappingExistsForFieldException $e

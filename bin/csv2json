@@ -3,6 +3,5 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$application = new Csv2Json\Application();
-
+$application = new \Csv2Json\Application();
 exit($application->run($argv));
