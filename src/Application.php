@@ -4,21 +4,21 @@ namespace Csv2Json;
 
 use Csv2Json\Aggregator\Aggregator;
 use Csv2Json\Aggregator\Exception\InvalidFieldException;
-use Csv2Json\JsonEncoder\Exception\UnableToEncodeJsonException;
-use Csv2Json\Formatter\DescriptionFile\DescriptionFile;
-use Csv2Json\JsonEncoder\JsonEncoder;
-use Csv2Json\Formatter\Exception\FieldNotNullableException;
-use Csv2Json\Formatter\Type\EmptyFormatterType;
-use Csv2Json\Formatter\Exception\UnformattableValueException;
 use Csv2Json\CsvReader\CsvReader;
+use Csv2Json\Formatter\DescriptionFile\DescriptionFile;
+use Csv2Json\Formatter\Exception\FieldNotNullableException;
+use Csv2Json\Formatter\Exception\UnformattableValueException;
 use Csv2Json\Formatter\Formatter;
 use Csv2Json\Formatter\Type\BooleanFormatterType;
-use Csv2Json\Formatter\Type\DatetimeFormatterType;
 use Csv2Json\Formatter\Type\DateFormatterType;
+use Csv2Json\Formatter\Type\DatetimeFormatterType;
+use Csv2Json\Formatter\Type\EmptyFormatterType;
 use Csv2Json\Formatter\Type\FloatFormatterType;
 use Csv2Json\Formatter\Type\IntegerFormatterType;
 use Csv2Json\Formatter\Type\StringFormatterType;
 use Csv2Json\Formatter\Type\TimeFormatterType;
+use Csv2Json\JsonEncoder\Exception\UnableToEncodeJsonException;
+use Csv2Json\JsonEncoder\JsonEncoder;
 
 final class Application
 {
@@ -60,12 +60,12 @@ final class Application
             $data = $this->reader->read($arguments->getCsvFilePath(), $arguments->getFields());
             $data = $this->formatter->format($fieldsDescription, $data);
             $data = $this->aggregator->aggregate($data, $arguments->getAggregate());
-            print $this->encoder->encode(
+            echo $this->encoder->encode(
                 $data,
                 $arguments->isPretty()
             );
-        } catch (FieldNotNullableException|UnformattableValueException|FieldNotNullableException|UnformattableValueException|InvalidFieldException|UnableToEncodeJsonException $e) {
-            print $e->getMessage();
+        } catch (FieldNotNullableException | UnformattableValueException | FieldNotNullableException | UnformattableValueException | InvalidFieldException | UnableToEncodeJsonException $e) {
+            echo $e->getMessage();
 
             return 1;
         }

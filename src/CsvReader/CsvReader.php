@@ -2,8 +2,6 @@
 
 namespace Csv2Json\CsvReader;
 
-use Csv2Json\Formatter\Formatter;
-
 final class CsvReader
 {
     private const ALLOWED_DELIMITERS = [',', ';', '|', ' '];
@@ -30,8 +28,8 @@ final class CsvReader
         $file->setCsvControl($delimiter, self::ENCLOSURE);
 
         $data = [];
-        foreach($file as $rowIndex => $rowValues) {
-            if ($rowIndex === 0) {
+        foreach ($file as $rowIndex => $rowValues) {
+            if (0 === $rowIndex) {
                 // Skip the header rowValues
                 continue;
             }
@@ -39,7 +37,7 @@ final class CsvReader
             $extractedRow = [];
             foreach ($rowValues as $columnIndex => $columnValue) {
                 $fieldName = $this->columnIndexToFieldName[$columnIndex];
-                if (in_array($fieldName, $fields, true)) {
+                if (\in_array($fieldName, $fields, true)) {
                     $extractedRow[$fieldName] = $columnValue;
                 }
             }
@@ -54,7 +52,7 @@ final class CsvReader
     {
         $delimiters = array_fill_keys(self::ALLOWED_DELIMITERS, 0);
         foreach ($delimiters as $delimiter => &$count) {
-            $count = count(str_getcsv($headerLine, $delimiter));
+            $count = \count(str_getcsv($headerLine, $delimiter));
         }
 
         return array_search(max($delimiters), $delimiters);

@@ -6,7 +6,7 @@ class StringFormatterType implements FormatterType
 {
     public function supports(string $type, ?string $value): bool
     {
-        return $type === 'string';
+        return 'string' === $type;
     }
 
     public function format(?string $value)

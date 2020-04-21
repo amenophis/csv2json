@@ -42,7 +42,7 @@ final class Arguments
     {
         $parsedArgs = [];
 
-        if (count($args) > 2) {
+        if (\count($args) > 2) {
             // Remove the script name
             array_shift($args);
 
@@ -50,10 +50,10 @@ final class Arguments
 
             do {
                 $name = str_replace('--', '', array_shift($args));
-                $value = ($name === 'pretty') ? true : array_shift($args);
+                $value = ('pretty' === $name) ? true : array_shift($args);
 
                 $parsedArgs[$name] = $value;
-            } while (count($args) > 0);
+            } while (\count($args) > 0);
         }
 
         return new self(
@@ -67,7 +67,7 @@ final class Arguments
 
     public function hasParsingErrors(): bool
     {
-        return count($this->parsingErrors) > 0;
+        return \count($this->parsingErrors) > 0;
     }
 
     public function getParsingErrors(): array

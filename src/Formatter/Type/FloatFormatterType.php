@@ -6,7 +6,7 @@ class FloatFormatterType implements FormatterType
 {
     public function supports(string $type, ?string $value): bool
     {
-        return $type === 'float' && null !== filter_var($value, FILTER_VALIDATE_FLOAT|FILTER_NULL_ON_FAILURE);
+        return 'float' === $type && null !== filter_var($value, FILTER_VALIDATE_FLOAT | FILTER_NULL_ON_FAILURE);
     }
 
     public function format(?string $value)

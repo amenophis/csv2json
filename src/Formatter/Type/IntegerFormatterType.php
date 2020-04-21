@@ -6,7 +6,7 @@ class IntegerFormatterType implements FormatterType
 {
     public function supports(string $type, ?string $value): bool
     {
-        return $type === 'integer' || $type === 'int';
+        return 'integer' === $type || 'int' === $type;
     }
 
     public function format(?string $value)

@@ -12,7 +12,7 @@ final class Aggregator
     public function aggregate(array $data, string $fieldName): array
     {
         $fieldValues = array_column($data, $fieldName);
-        if (count($fieldValues) === 0) {
+        if (0 === \count($fieldValues)) {
             throw InvalidFieldException::create($fieldName);
         }
 

@@ -6,7 +6,7 @@ abstract class TestCase
 {
     protected function assertTrue($value)
     {
-        if ($value !== true) {
+        if (true !== $value) {
             throw new AssertException('The value must be true');
         }
     }

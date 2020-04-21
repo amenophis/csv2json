@@ -12,12 +12,8 @@ class TypeMapping
 
     public function __construct(string $field, string $type, bool $nullable)
     {
-        if (!in_array($type, self::ALLOWED_TYPES, true)) {
-            throw new \InvalidArgumentException(sprintf(
-                'The type "%s" is not valid. Allowed: "%s"',
-                $type,
-                implode('","', self::ALLOWED_TYPES)
-            ));
+        if (!\in_array($type, self::ALLOWED_TYPES, true)) {
+            throw new \InvalidArgumentException(sprintf('The type "%s" is not valid. Allowed: "%s"', $type, implode('","', self::ALLOWED_TYPES)));
         }
         $this->field = $field;
         $this->type = $type;

@@ -5,31 +5,30 @@ namespace Csv2Json\Tests\Unit\Encoder;
 use Csv2Json\Aggregator\Aggregator;
 use Csv2Json\Tests\TestCase;
 
-(new class extends TestCase
-{
+(new class() extends TestCase {
     public function __invoke()
     {
         $data = [
             [
                 'firstname' => 'Dupond',
-                'value' => 'Jean'
+                'value' => 'Jean',
             ],
             [
                 'firstname' => 'Dupond',
-                'value' => 'Jacques'
+                'value' => 'Jacques',
             ],
             [
                 'firstname' => 'Durand',
-                'value' => 'Pierre'
+                'value' => 'Pierre',
             ],
             [
                 'firstname' => 'Dupond',
-                'value' => 'Thierry'
+                'value' => 'Thierry',
             ],
             [
                 'firstname' => 'Durand',
-                'value' => 'Etienne'
-            ]
+                'value' => 'Etienne',
+            ],
         ];
         $aggregator = new Aggregator();
         $data = $aggregator->aggregate($data, 'firstname');
@@ -43,7 +42,7 @@ use Csv2Json\Tests\TestCase;
             'Durand' => [
                 ['value' => 'Pierre'],
                 ['value' => 'Etienne'],
-            ]
+            ],
         ]);
     }
 })();

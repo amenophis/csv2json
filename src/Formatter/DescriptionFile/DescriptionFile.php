@@ -27,7 +27,7 @@ class DescriptionFile
         $mapping = [];
         foreach ($lines as $line) {
             if (preg_match('/^(\w+) ?= ?(\?)?(\w+).*$/', $line, $matches)) {
-                $mapping[$matches[1]] = new TypeMapping($matches[1], $matches[3], $matches[2] === '?');
+                $mapping[$matches[1]] = new TypeMapping($matches[1], $matches[3], '?' === $matches[2]);
             }
         }
 

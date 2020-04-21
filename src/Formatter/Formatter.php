@@ -3,8 +3,8 @@
 namespace Csv2Json\Formatter;
 
 use Csv2Json\Formatter\DescriptionFile\DescriptionFile;
-use Csv2Json\Formatter\Exception\NoMappingExistsForFieldException;
 use Csv2Json\Formatter\Exception\FieldNotNullableException;
+use Csv2Json\Formatter\Exception\NoMappingExistsForFieldException;
 use Csv2Json\Formatter\Exception\UnformattableValueException;
 use Csv2Json\Formatter\Type\FormatterType;
 

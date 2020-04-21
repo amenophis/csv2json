@@ -7,8 +7,8 @@ class BooleanFormatterType implements FormatterType
     public function supports(string $type, ?string $value): bool
     {
         return
-            ($type === 'boolean' || $type === 'bool')
-            && null !== filter_var($value, FILTER_VALIDATE_BOOLEAN|FILTER_NULL_ON_FAILURE)
+            ('boolean' === $type || 'bool' === $type)
+            && null !== filter_var($value, FILTER_VALIDATE_BOOLEAN | FILTER_NULL_ON_FAILURE)
         ;
     }
 
