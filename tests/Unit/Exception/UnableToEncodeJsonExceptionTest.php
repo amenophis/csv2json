@@ -9,7 +9,6 @@ return new class() extends TestCase {
     public function __invoke()
     {
         $this->testMessageIsValid();
-
     }
 
     private function testMessageIsValid()

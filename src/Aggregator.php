@@ -28,10 +28,10 @@ final class Aggregator
 
     private function valueToKey($value)
     {
-        if ($value === true) {
+        if (true === $value) {
             return 'true';
         }
-        if ($value === false) {
+        if (false === $value) {
             return 'false';
         }
 

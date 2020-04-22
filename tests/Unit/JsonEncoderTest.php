@@ -12,7 +12,6 @@ return new class() extends TestCase {
         $this->testReturnPrettyValidJson();
     }
 
-
     private function testReturnValidJson()
     {
         $data = [
