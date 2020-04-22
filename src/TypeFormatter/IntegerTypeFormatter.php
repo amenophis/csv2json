@@ -6,11 +6,14 @@ class IntegerTypeFormatter implements TypeFormatter
 {
     public function supports(string $type, ?string $value): bool
     {
-        return 'integer' === $type || 'int' === $type;
+        return
+            ('integer' === $type || 'int' === $type)
+            && null !== filter_var($value, FILTER_VALIDATE_INT, FILTER_NULL_ON_FAILURE)
+        ;
     }
 
     public function format(?string $value)
     {
-        return (int) $value;
+        return filter_var($value, FILTER_VALIDATE_INT);
     }
 }

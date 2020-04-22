@@ -16,16 +16,25 @@ final class Aggregator
             throw InvalidFieldException::create($fieldName);
         }
 
-        $aggregatorValues = array_unique($fieldValues);
-        $newData = array_fill_keys($aggregatorValues, []);
-
+        $aggregatedData = [];
         foreach ($data as $rowIndex => $rowValue) {
             $aggregatorValue = $rowValue[$fieldName];
             unset($rowValue[$fieldName]);
-
-            $newData[$aggregatorValue][] = $rowValue;
+            $aggregatedData[$this->valueToKey($aggregatorValue)][] = $rowValue;
         }
 
-        return $newData;
+        return $aggregatedData;
+    }
+
+    private function valueToKey($value)
+    {
+        if ($value === true) {
+            return 'true';
+        }
+        if ($value === false) {
+            return 'false';
+        }
+
+        return $value;
     }
 }

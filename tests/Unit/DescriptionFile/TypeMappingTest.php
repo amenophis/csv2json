@@ -1,12 +1,17 @@
 <?php
 
-namespace Csv2Json\Tests\Unit\Formatter\DescriptionFile;
+namespace Csv2Json\Tests\Unit\DescriptionFile;
 
 use Csv2Json\DescriptionFile\TypeMapping;
 use Csv2Json\Tests\TestCase;
 
 return new class() extends TestCase {
     public function __invoke()
+    {
+        $this->isWellConstructed();
+    }
+
+    public function isWellConstructed()
     {
         $typeMapping = new TypeMapping(
             $field = 'id',

@@ -18,6 +18,13 @@ abstract class TestCase
         }
     }
 
+    protected function assertNull($value)
+    {
+        if (null !== $value) {
+            throw new AssertException('The value must be true');
+        }
+    }
+
     protected function assertTrue($value)
     {
         if (true !== $value) {

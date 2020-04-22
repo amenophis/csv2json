@@ -11,6 +11,6 @@ class StringTypeFormatter implements TypeFormatter
 
     public function format(?string $value)
     {
-        return $value;
+        return $value ?? '';
     }
 }

@@ -2,16 +2,21 @@
 
 namespace Csv2Json\Tests\Unit\Exception;
 
-use Csv2Json\Exception\FileCannotBeOpenedException;
+use Csv2Json\Exception\FieldNotNullableException;
 use Csv2Json\Tests\TestCase;
 
 return new class() extends TestCase {
     public function __invoke()
     {
-        $e = FileCannotBeOpenedException::create($fileName = 'file-name');
+        $this->testMessageIsValid();
+    }
+
+    private function testMessageIsValid()
+    {
+        $e = FieldNotNullableException::create();
 
         $this->assertEquals(
-            "The file {$fileName} can't be opened",
+            'Not nullable field',
             $e->getMessage()
         );
     }

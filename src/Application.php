@@ -57,6 +57,7 @@ final class Application
 
             $data = $this->csvReader->read($arguments->getCsvFilePath(), $arguments->getFields());
             $data = $this->formatter->format($fieldsDescription, $data);
+
             if (null !== $arguments->getAggregate()) {
                 $data = $this->aggregator->aggregate($data, $arguments->getAggregate());
             }

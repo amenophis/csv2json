@@ -8,6 +8,12 @@ use Csv2Json\Tests\TestCase;
 return new class() extends TestCase {
     public function __invoke()
     {
+        $this->testMessageIsValid();
+
+    }
+
+    private function testMessageIsValid()
+    {
         $e = UnableToEncodeJsonException::create($error = 'json encode error');
 
         $this->assertEquals(

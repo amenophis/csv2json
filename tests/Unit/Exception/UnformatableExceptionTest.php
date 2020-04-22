@@ -8,6 +8,11 @@ use Csv2Json\Tests\TestCase;
 return new class() extends TestCase {
     public function __invoke()
     {
+        $this->testMessageIsValid();
+    }
+
+    private function testMessageIsValid()
+    {
         $e = UnformatableValueException::create();
 
         $this->assertEquals(

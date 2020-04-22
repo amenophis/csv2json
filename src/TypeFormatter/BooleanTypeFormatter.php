@@ -8,7 +8,7 @@ class BooleanTypeFormatter implements TypeFormatter
     {
         return
             ('boolean' === $type || 'bool' === $type)
-            && null !== filter_var($value, FILTER_VALIDATE_BOOLEAN | FILTER_NULL_ON_FAILURE)
+            && null !== filter_var($value, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE)
         ;
     }
 
