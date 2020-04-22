@@ -1,6 +1,6 @@
 # csv2json
 
-A little to parse CSV file using type mapping and eport to JSON 
+A little tool to parse CSV file using type mapping and export to JSON 
 
 ## Installation
 ```bash
