@@ -1,0 +1,12 @@
+### Ceci est un commentaire.
+# les lignes vide ne sont pas utilisées
+
+id=?int
+subid=integer
+name = string  # oui, il peut y avoir des espaces de chaque coté du "="
+date=date
+time=time
+datetime=datetime
+length =float
+valid=bool
+invalid=boolean

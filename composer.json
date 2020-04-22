@@ -1,0 +1,24 @@
+{
+    "name": "amenophis/csv2json",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Jérémy Leherpeur",
+            "email": "amenophis@leherpeur.net"
+        }
+    ],
+    "autoload": {
+        "psr-4": { "Csv2Json\\": "src/" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Csv2Json\\Tests\\": "tests/" }
+    },
+    "require": {
+        "php": "^7.4",
+        "ext-json": "*"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.16",
+        "symfony/var-dumper": "^5.0"
+    }
+}
