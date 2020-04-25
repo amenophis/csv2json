@@ -8,7 +8,7 @@ use Csv2Json\Exception\NoMappingExistsForFieldException;
 use Csv2Json\Tests\TestCase;
 
 return new class() extends TestCase {
-    public function __invoke()
+    public function __invoke(): void
     {
         $this->testParse();
         $this->testThrowExceptionIfFileDoesntExists();
@@ -16,8 +16,7 @@ return new class() extends TestCase {
         $this->testThrowExceptionIfMappingDoesntExists();
     }
 
-    public function testParse()
-    {
+    private function testParse(): void    {
         $description = DescriptionFile::parse(self::FIXTURES_DIR.'/description.txt');
 
         $idType = $description->getType('id');
@@ -66,22 +65,19 @@ return new class() extends TestCase {
         $this->assertFalse($invalidType->isNullable());
     }
 
-    public function testThrowExceptionIfFileDoesntExists()
-    {
+    private function testThrowExceptionIfFileDoesntExists(): void    {
         $this->expectException(FileCannotBeOpenedException::class, function () {
             DescriptionFile::parse(self::FIXTURES_DIR.'/phantom.txt');
         });
     }
 
-    public function testThrowExceptionIfFileIsADirectory()
-    {
+    private function testThrowExceptionIfFileIsADirectory(): void    {
         $this->expectException(FileCannotBeOpenedException::class, function () {
             DescriptionFile::parse(self::FIXTURES_DIR);
         });
     }
 
-    public function testThrowExceptionIfMappingDoesntExists()
-    {
+    private function testThrowExceptionIfMappingDoesntExists(): void    {
         $description = DescriptionFile::parse(self::FIXTURES_DIR.'/description.txt');
         $this->expectException(NoMappingExistsForFieldException::class, function () use ($description) {
             $description->getType('phantom');

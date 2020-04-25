@@ -7,13 +7,13 @@ use Csv2Json\Exception\InvalidFieldException;
 use Csv2Json\Tests\TestCase;
 
 return new class() extends TestCase {
-    public function __invoke()
+    public function __invoke(): void
     {
         $this->testGroupByFieldName();
         $this->testThrowExceptionIfAggregateFieldDoesntEsists();
     }
 
-    private function testGroupByFieldName()
+    private function testGroupByFieldName(): void
     {
         $data = [
             [
@@ -53,7 +53,7 @@ return new class() extends TestCase {
         ]);
     }
 
-    private function testThrowExceptionIfAggregateFieldDoesntEsists()
+    private function testThrowExceptionIfAggregateFieldDoesntEsists(): void
     {
         $data = [
             [

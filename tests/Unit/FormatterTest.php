@@ -16,15 +16,15 @@ use Csv2Json\TypeFormatter\IntegerTypeFormatter;
 use Csv2Json\TypeFormatter\StringTypeFormatter;
 use Csv2Json\TypeFormatter\TimeTypeFormatter;
 
-return new class() extends TestCase {
-    public function __invoke()
+return new class() extends TestCase{
+    public function __invoke(): void
     {
         $this->testFormatRecursiveData();
         $this->testThrowExceptionIfEmptyValueForNotNullableField();
         $this->testThrowExceptionIfNoFormatterExistsForType();
     }
 
-    public function testFormatRecursiveData()
+    private function testFormatRecursiveData(): void
     {
         $descriptionFile = DescriptionFile::parse(self::FIXTURES_DIR.'/description.txt');
 
@@ -68,7 +68,7 @@ return new class() extends TestCase {
         );
     }
 
-    public function testThrowExceptionIfEmptyValueForNotNullableField()
+    private function testThrowExceptionIfEmptyValueForNotNullableField(): void
     {
         $descriptionFile = DescriptionFile::parse(self::FIXTURES_DIR.'/description.txt');
 
@@ -96,7 +96,7 @@ return new class() extends TestCase {
         });
     }
 
-    public function testThrowExceptionIfNoFormatterExistsForType()
+    private function testThrowExceptionIfNoFormatterExistsForType(): void
     {
         $descriptionFile = DescriptionFile::parse(self::FIXTURES_DIR.'/description.txt');
 

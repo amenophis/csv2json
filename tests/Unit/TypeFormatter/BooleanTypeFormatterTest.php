@@ -6,13 +6,13 @@ use Csv2Json\Tests\TestCase;
 use Csv2Json\TypeFormatter\BooleanTypeFormatter;
 
 return new class() extends TestCase {
-    public function __invoke()
+    public function __invoke(): void
     {
         $this->testSupport();
         $this->testFormat();
     }
 
-    private function testSupport()
+    private function testSupport(): void
     {
         $formatter = new BooleanTypeFormatter();
 
@@ -33,7 +33,7 @@ return new class() extends TestCase {
         $this->assertFalse($formatter->supports('boolean', '1.1'));
     }
 
-    private function testFormat()
+    private function testFormat(): void
     {
         $formatter = new BooleanTypeFormatter();
 
