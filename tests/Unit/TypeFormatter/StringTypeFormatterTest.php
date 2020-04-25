@@ -6,13 +6,13 @@ use Csv2Json\Tests\TestCase;
 use Csv2Json\TypeFormatter\StringTypeFormatter;
 
 return new class() extends TestCase {
-    public function __invoke()
+    public function __invoke(): void
     {
         $this->testSupport();
         $this->testFormat();
     }
 
-    private function testSupport()
+    private function testSupport(): void
     {
         $formatter = new StringTypeFormatter();
 
@@ -34,7 +34,7 @@ return new class() extends TestCase {
         $this->assertFalse($formatter->supports('integer', '1.1'));
     }
 
-    private function testFormat()
+    private function testFormat(): void
     {
         $formatter = new StringTypeFormatter();
 

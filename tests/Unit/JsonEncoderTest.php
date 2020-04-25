@@ -6,13 +6,13 @@ use Csv2Json\JsonEncoder;
 use Csv2Json\Tests\TestCase;
 
 return new class() extends TestCase {
-    public function __invoke()
+    public function __invoke(): void
     {
         $this->testReturnValidJson();
         $this->testReturnPrettyValidJson();
     }
 
-    private function testReturnValidJson()
+    private function testReturnValidJson(): void
     {
         $data = [
             'json' => true,
@@ -23,7 +23,7 @@ return new class() extends TestCase {
         $this->assertEquals($encoded, json_encode($data, JSON_PRETTY_PRINT));
     }
 
-    private function testReturnPrettyValidJson()
+    private function testReturnPrettyValidJson(): void
     {
         $data = [
             'json' => true,

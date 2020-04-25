@@ -6,12 +6,12 @@ use Csv2Json\DescriptionFile\TypeMapping;
 use Csv2Json\Tests\TestCase;
 
 return new class() extends TestCase {
-    public function __invoke()
+    public function __invoke(): void
     {
         $this->isWellConstructed();
     }
 
-    public function isWellConstructed()
+    private function isWellConstructed(): void
     {
         $typeMapping = new TypeMapping(
             $field = 'id',

@@ -11,35 +11,35 @@ abstract class TestCase
      */
     abstract public function __invoke();
 
-    protected function assertEquals($expected, $value)
+    protected function assertEquals($expected, $value): void
     {
         if ($expected !== $value) {
             throw new AssertException('The value must be equals');
         }
     }
 
-    protected function assertNull($value)
+    protected function assertNull($value): void
     {
         if (null !== $value) {
             throw new AssertException('The value must be true');
         }
     }
 
-    protected function assertTrue($value)
+    protected function assertTrue($value): void
     {
         if (true !== $value) {
             throw new AssertException('The value must be true');
         }
     }
 
-    protected function assertFalse($value)
+    protected function assertFalse($value): void
     {
         if (false !== $value) {
             throw new AssertException('The value must be false');
         }
     }
 
-    protected function expectException(string $className, callable $function)
+    protected function expectException(string $className, callable $function): void
     {
         try {
             $function();

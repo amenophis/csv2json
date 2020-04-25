@@ -6,13 +6,13 @@ use Csv2Json\Tests\TestCase;
 use Csv2Json\TypeFormatter\EmptyTypeFormatter;
 
 return new class() extends TestCase {
-    public function __invoke()
+    public function __invoke(): void
     {
         $this->testSupport();
         $this->testFormat();
     }
 
-    private function testSupport()
+    private function testSupport(): void
     {
         $formatter = new EmptyTypeFormatter();
 
@@ -23,7 +23,7 @@ return new class() extends TestCase {
         $this->assertFalse($formatter->supports('other_type', 'false'));
     }
 
-    private function testFormat()
+    private function testFormat(): void
     {
         $formatter = new EmptyTypeFormatter();
 

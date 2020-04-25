@@ -7,7 +7,7 @@ use Csv2Json\Exception\FileCannotBeOpenedException;
 use Csv2Json\Tests\TestCase;
 
 return new class() extends TestCase {
-    public function __invoke()
+    public function __invoke(): void
     {
         $this->testReadAllFields();
         $this->testReadFilteredFields();
@@ -15,7 +15,7 @@ return new class() extends TestCase {
         $this->testThrowExceptionIfFileIsADirectory();
     }
 
-    private function testReadAllFields()
+    private function testReadAllFields(): void
     {
         $csvReader = new CsvReader();
         $data = $csvReader->read(self::FIXTURES_DIR.'/sample.csv', ['name', 'id', 'date']);
@@ -59,7 +59,7 @@ return new class() extends TestCase {
         ], $data);
     }
 
-    private function testReadFilteredFields()
+    private function testReadFilteredFields(): void
     {
         $csvReader = new CsvReader();
         $data = $csvReader->read(self::FIXTURES_DIR.'/sample.csv', ['name']);
@@ -89,7 +89,7 @@ return new class() extends TestCase {
         ], $data);
     }
 
-    private function testThrowExceptionIfFileDoesntExists()
+    private function testThrowExceptionIfFileDoesntExists(): void
     {
         $csvReader = new CsvReader();
         $this->expectException(FileCannotBeOpenedException::class, function () use ($csvReader) {
@@ -97,7 +97,7 @@ return new class() extends TestCase {
         });
     }
 
-    private function testThrowExceptionIfFileIsADirectory()
+    private function testThrowExceptionIfFileIsADirectory(): void
     {
         $csvReader = new CsvReader();
         $this->expectException(FileCannotBeOpenedException::class, function () use ($csvReader) {
