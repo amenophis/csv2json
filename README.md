@@ -1,5 +1,7 @@
 # csv2json
 
+> :warning: **The repository is not maintained**: Use at your own risks !
+
 A little tool to parse CSV file using type mapping and export to JSON 
 
 ## Installation
